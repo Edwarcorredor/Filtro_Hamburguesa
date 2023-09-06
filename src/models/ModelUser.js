@@ -1,22 +1,22 @@
-import { conexion } from "../config/atlas.js";
+import  conexion  from "../config/atlas.js";
 import getNextSequenceValue from '../db/autoIncrement.js'
 import { hash } from "bcrypt";
 const db = await conexion();
-const User = db.collection("users");
+const Vendedor = db.collection("vendedor");
 
 class ModelUser {
     static async getUser(id){
-        return await User.find({_id: id}).toArray();
+        return await Vendedor.find({_id: id}).toArray();
     }
 
     static async setUser(datos){
         try{
-            const checkEmail = await User.findOne({ email: datos.email });
+            const checkEmail = await Vendedor.findOne({ email: datos.email });
             if (checkEmail) {
                 return "Correo ya registrado"
             }
-            const userInsert = await User.insertOne({
-                _id: await getNextSequenceValue(db, "users"),
+            const userInsert = await Vendedor.insertOne({
+                _id: await getNextSequenceValue(db, "vendedor"),
                 ...datos,
                 password: await hash(datos.password, 10),
             });
@@ -30,7 +30,7 @@ class ModelUser {
     static async updateUser(datos, ID){
         try{
 
-            const existingEmail = await User.findOne({ email: datos.email, _id: { $ne: ID } });
+            const existingEmail = await Vendedor.findOne({ email: datos.email, _id: { $ne: ID } });
     
             if (existingEmail) {
                 return "Correo ya registrado";
@@ -39,7 +39,7 @@ class ModelUser {
             const filter = { _id: ID };
             datos.password = await hash(datos.password, 10);
             const update = { $set: datos };
-            const result = await User.updateOne(filter, update);
+            const result = await Vendedor.updateOne(filter, update);
     
             return result;
         } catch(error){
@@ -51,7 +51,7 @@ class ModelUser {
     static async deleteUser(ID){
         try{
             const filter = {_id: ID}
-            const result = await User.deleteOne(filter);
+            const result = await Vendedor.deleteOne(filter);
             return result;
         }catch(error){
             return {status: 400, message: error.message};

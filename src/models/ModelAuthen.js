@@ -1,14 +1,14 @@
-import connect from "../db/connectDB.js";
+import conexion from "../config/atlas.js";
 
-const conexion = (await connect())
+const db = await conexion();
 
 
 export default class ModelAuthen {
 
-    static async login(email, collection) {
+    static async login(email) {
         try {
-            const con = conexion.db().collection(collection);
-            const getUser = await con.findOne({ correo: email });
+            const con = db.collection("vendedor");
+            const getUser = await con.findOne({ email: email });
             return getUser;
         } catch (error) {
             return error;

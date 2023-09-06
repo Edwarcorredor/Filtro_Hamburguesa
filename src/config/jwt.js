@@ -27,7 +27,6 @@ const validarToken = async (token) => {
         
         return jwtData.payload;
     } catch (error) {
-        console.log(error);
         return false;
     }
 

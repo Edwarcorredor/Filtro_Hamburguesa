@@ -1,35 +1,41 @@
 import express from "express";
 import dotenv from "dotenv";
-import passportConfig from './helpers/passportHelperties.js';
 import loginRouter from "./routes/loginRouter.js";
-const acl = require('express-acl');
+import userRouter from "./routes/userRouter.js";
+import passportConfig from "./helpers/passportHelpert.js"
+import ingredienteRouter from "./routes/ingredienteRouter.js";
+
+//import acl from "express-acl";
 dotenv.config();
 
-
+/*
 acl.config({
   filename: 'nacl.json',
-  baseUrl: 'api',
+  baseUrl: 'tienda',
   roleSearchPath: 'user.rol',
   denyCallback: (res) => res.status(403).json({
     message: 'No tienes permisos para acceder a este recurso'
   })
-});
+});*/
 
 const app = express();
 app.use(express.json());
 
 app.use('/auth', loginRouter)
-app.use(passportHelper.initialize());
+app.use('/vendedores', userRouter)
+app.use(passportConfig.initialize())
+app.use(passportConfig.authenticate('bearer', { session: false }))
+app.use('/ingredientes', ingredienteRouter)
 
-app.get('/token/:usuario', crearToken);
 
-app.get('/api/admin', passportHelper.authenticate('bearer', { session: false }), acl.authorize, (req, res) => {
+/*
+app.get('/api/admin', passport.authenticate('bearer', { session: false }), acl.authorize, (req, res) => {
   res.json({mensaje: 'Hola admin', usuario: req.user});
 });
-app.get('/api/vendedor', passportHelper.authenticate('bearer', { session: false }), acl.authorize, (req, res) => {
+app.get('/api/vendedor', passport.authenticate('bearer', { session: false }), acl.authorize, (req, res) => {
   res.json({mensaje: 'Hola vendedor', usuario: req.user});
 });
-
+*/
 
 let config = JSON.parse(process.env.MY_SERVER);
 app.listen(config, () => {

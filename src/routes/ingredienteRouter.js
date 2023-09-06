@@ -10,5 +10,6 @@ const ingredienteRouter = Router();
 ingredienteRouter
 .use(limitPet())
 .get('/stockmenor', version({"1.0.0":  ControllerIngrediente.getStockMenor}))
+.put('/aumentar', version({"1.0.0": ControllerIngrediente.aumentarPrecio}))
 
 export default ingredienteRouter;

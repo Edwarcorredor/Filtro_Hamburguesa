@@ -23,7 +23,7 @@ db.createCollection("ingrediente", {
                 description: "Fecha de vencimiento del ingrediente"
             },
             precio_unitario: {
-                bsonType: "int",
+                bsonType: "number",
                 description: "Precio unitario del ingrediente"
             },
             stock: {
@@ -185,3 +185,6 @@ db.counters.insertMany([
   {_id: "vendedor", seq: 0 },
 ]);
 
+
+use("filtroHamburguesa_EdwarCorredor");
+db.ingrediente.updateMany({}, { $mul: { precio_unitario: 1.5 } })

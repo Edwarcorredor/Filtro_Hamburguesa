@@ -10,6 +10,10 @@ class ModelIngrediente {
     static async getStockMenor(){
         return await Ingrediente.find({stock: {$lte: 400}}).toArray();
     }
+
+    static async aumentarPrecio(){
+        return await Ingrediente.updateMany({}, { $mul: { precio_unitario: 1.5 } })
+    }
 }
 
 export default ModelIngrediente;

@@ -4,7 +4,7 @@ async function getNextSequenceValue(db, sequenceName) {
         { $inc: { seq: 1 } },
         { returnDocument: "after" } 
     );
-    return sequenceDocument.value.seq; 
+    return sequenceDocument.seq; 
 }
 
 export default getNextSequenceValue;

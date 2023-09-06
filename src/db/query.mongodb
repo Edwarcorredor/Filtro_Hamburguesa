@@ -115,7 +115,7 @@ db.createCollection("chef",{
 db.chef.insertMany([{_id:1, nombre: "Edwar", especialidad: "Carnes"}, {_id:2, nombre: "Danilo", especialidad:"Cocina internacional"}]);
 
 
-use("filtroHamburguesa_EdwarCorredor");
+
 db.createCollection("categoria",{
     validator: {
        $jsonSchema: {
@@ -142,3 +142,40 @@ db.createCollection("categoria",{
 });
 
 db.categoria.insertMany([{_id:1, nombre:"Gourmet", descripcion:"Gourmet muy rica"},{_id:2, nombre:"Vegetariana", descripcion:"Muy vegetal"}]);
+
+db.createCollection("vendedor", {
+    validator:{
+        $jsonSchema: {
+            bsonType: "object",
+            required: ["_id", "nombre", "email", "password"],
+            properties:{
+                _id: {
+                    bsonType: "int",
+                    description: "Identificador del vendedor"
+                },
+                nombre: {
+                    bsonType: "string",
+                    description: "Nombre del vendedor"
+                },
+                email: {
+                    bsonType: "string",
+                    description: "Email del vendedor"
+                },
+                password: {
+                    bsonType: "string",
+                    description: "Password del vendedor"
+                }
+            }
+
+        }
+    }
+})
+
+db.createCollection("counters");
+db.counters.insertMany([
+  { _id: "ingrediente", seq: 0 },
+  { _id: "hamburguesa", seq: 0 },
+  { _id: "chef", seq: 0 },
+  { _id: "categoria", seq: 0 },
+  {_id: "vendedor", seq: 0 },
+]);

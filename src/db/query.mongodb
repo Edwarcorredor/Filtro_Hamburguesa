@@ -1,0 +1,144 @@
+use("filtroHamburguesa_EdwarCorredor");
+
+db.createCollection("ingrediente", {
+    validator: {
+       $jsonSchema: {
+          bsonType: "object",
+          required: [ "_id", 
+          "descripcion", 
+          "fecha_vencimiento", 
+          "precio_unitario", 
+          "stock" ],
+          properties: {
+            _id: {
+                bsonType: "int",
+                description: "Identificador del ingrediente"
+            },
+            descripcion: {
+                bsonType: "string",
+                description: "Descripción del ingrediente"
+            },
+            fecha_vencimiento: {
+                bsonType: "date",
+                description: "Fecha de vencimiento del ingrediente"
+            },
+            precio_unitario: {
+                bsonType: "int",
+                description: "Precio unitario del ingrediente"
+            },
+            stock: {
+                bsonType: "int",
+                description: "Cantidad actual del ingrediente"
+            }
+          }
+       }
+    }
+});
+use("filtroHamburguesa_EdwarCorredor");
+db.ingrediente.insertMany([{_id:1, descripcion: "Pan", fecha_vencimiento: new ISODate('2023-05-01'), precio_unitario: 1000, stock: 50 },
+{_id:2, descripcion: "Carne", fecha_vencimiento: new ISODate('2023-10-02'), precio_unitario: 2000, stock: 50 }
+])
+
+db.createCollection("hamburguesa",{
+    validator: {
+       $jsonSchema: {
+          bsonType: "object",
+          required: [ "_id", 
+          "nombre", 
+          "categoria", 
+          "ingredientes", 
+          "chef",
+          "precio"],
+          properties: {
+            _id: {
+                bsonType: "int",
+                description: "Identificador de la hamburguesa"
+            },
+            nombre: {
+                bsonType: "string",
+                description: "Nombre de la hamburguesa"
+            },
+            categoria: {
+                bsonType: "string",
+                description: "Categoria de la hamburguesa"
+            },
+            ingredientes: {
+                bsonType: "array",
+                items: {
+                    bsonType:"string",
+                    description: "Ingrediente de la hamburguesa"
+                }
+            },
+            chef: {
+                bsonType: "string",
+                description: "Nombre del chef"
+            },
+            precio:{
+                bsonType: "int",
+                description: "Precio de la hamburguesa"
+            }
+          }
+       }
+    }
+});
+
+db.hamburguesa.insertMany([{_id: 1, nombre: "Clasica", categoria: "Carne", ingredientes: ["Pan", "Carne"], chef: "Antonion", precio: 1000},
+{_id: 2, nombre: "Vegetales", categoria: "Vegetariana", ingredientes: ["Pan", "Lentejas"], chef: "Vegetanion", precio: 1000}
+])
+
+
+db.createCollection("chef",{
+    validator: {
+       $jsonSchema: {
+          bsonType: "object",
+          required: [ "_id", 
+          "nombre", 
+          "especialidad"],
+          properties: {
+            _id: {
+                bsonType: "int",
+                description: "Identificador del chef"
+            },
+            nombre: {
+                bsonType: "string",
+                description: "Nombre del chef"
+            },
+            especialidad: {
+                bsonType: "string",
+                description: "Especialidad del chef"
+            }
+          }
+       }
+    }
+});
+
+db.chef.insertMany([{_id:1, nombre: "Edwar", especialidad: "Carnes"}, {_id:2, nombre: "Danilo", especialidad:"Cocina internacional"}]);
+
+
+use("filtroHamburguesa_EdwarCorredor");
+db.createCollection("categoria",{
+    validator: {
+       $jsonSchema: {
+          bsonType: "object",
+          required: [ "_id", 
+          "nombre", 
+          "descripcion"],
+          properties: {
+            _id: {
+                bsonType: "int",
+                description: "Identificador de la categoria"
+            },
+            nombre: {
+                bsonType: "string",
+                description: "Nombre de la categoria"
+            },
+            descripcion: {
+                bsonType: "string",
+                description: "Descripcion de la categoria"
+            }
+          }
+       }
+    }
+});
+
+db.categoria.insertMany([{_id:1, nombre:"Gourmet", descripcion:"Gourmet muy rica"},{_id:2, nombre:"Vegetariana", descripcion:"Muy vegetal"}]);

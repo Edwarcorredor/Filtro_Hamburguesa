@@ -147,7 +147,7 @@ db.createCollection("vendedor", {
     validator:{
         $jsonSchema: {
             bsonType: "object",
-            required: ["_id", "nombre", "email", "password"],
+            required: ["_id", "nombre", "email", "password", "rol"],
             properties:{
                 _id: {
                     bsonType: "int",
@@ -164,7 +164,12 @@ db.createCollection("vendedor", {
                 password: {
                     bsonType: "string",
                     description: "Password del vendedor"
+                },
+                rol: {
+                    bsonType: "string",
+                    description: "Rol del vendedor"
                 }
+
             }
 
         }
@@ -179,3 +184,4 @@ db.counters.insertMany([
   { _id: "categoria", seq: 0 },
   {_id: "vendedor", seq: 0 },
 ]);
+

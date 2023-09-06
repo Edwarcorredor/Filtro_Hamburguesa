@@ -7,18 +7,17 @@ import ingredienteRouter from "./routes/ingredienteRouter.js";
 import hamburguesaRouter from "./routes/hamburguesaRouter.js";
 import chefRouter from "./routes/chefRouter.js";
 
-//import acl from "express-acl";
+import acl from "express-acl";
 dotenv.config();
 
-/*
+
 acl.config({
-  filename: 'nacl.json',
-  baseUrl: 'tienda',
+  filename: './src/nacl.json',
   roleSearchPath: 'user.rol',
   denyCallback: (res) => res.status(403).json({
     message: 'No tienes permisos para acceder a este recurso'
   })
-});*/
+});
 
 const app = express();
 app.use(express.json());
@@ -26,7 +25,7 @@ app.use(express.json());
 app.use('/auth', loginRouter)
 app.use('/vendedores', userRouter)
 app.use(passportConfig.initialize())
-app.use(passportConfig.authenticate('bearer', { session: false }))
+app.use(passportConfig.authenticate('bearer', { session: false }), acl.authorize)
 app.use('/ingredientes', ingredienteRouter)
 app.use('/hamburguesas', hamburguesaRouter )
 app.use('/chefs', chefRouter )

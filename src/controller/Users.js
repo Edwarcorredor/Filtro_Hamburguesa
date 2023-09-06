@@ -22,10 +22,11 @@ export class Vendedor {
             }
         })
         telefono: string*/
-    constructor(p1, p2, p3) {
+    constructor(p1, p2, p3, p4) {
         this.nombre = p1;
         this.email = p2;
         this.password = p3;
+        this.rol = p4;
     }
 }
 __decorate([
@@ -61,3 +62,17 @@ __decorate([
     IsDefined({ message: () => { throw { status: 422, message: "El parametro password_vendedor es obligatorio" }; } }),
     __metadata("design:type", String)
 ], Vendedor.prototype, "password", void 0);
+__decorate([
+    Expose({ name: "rol_vendedor" }),
+    Transform(({ value }) => {
+        let data = /^(?=.*[a-zA-Z])[a-zA-Z0-9 ]+$/g.test(value);
+        if (data && typeof value == "string") {
+            return String(value);
+        }
+        else {
+            throw { status: 401, message: "Error en el rol_vendedor" };
+        }
+    }),
+    IsDefined({ message: () => { throw { status: 422, message: "El parametro rol_vendedor es obligatorio" }; } }),
+    __metadata("design:type", String)
+], Vendedor.prototype, "rol", void 0);

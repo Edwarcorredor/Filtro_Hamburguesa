@@ -4,6 +4,8 @@ import loginRouter from "./routes/loginRouter.js";
 import userRouter from "./routes/userRouter.js";
 import passportConfig from "./helpers/passportHelpert.js"
 import ingredienteRouter from "./routes/ingredienteRouter.js";
+import hamburguesaRouter from "./routes/hamburguesaRouter.js";
+import chefRouter from "./routes/chefRouter.js";
 
 //import acl from "express-acl";
 dotenv.config();
@@ -26,6 +28,8 @@ app.use('/vendedores', userRouter)
 app.use(passportConfig.initialize())
 app.use(passportConfig.authenticate('bearer', { session: false }))
 app.use('/ingredientes', ingredienteRouter)
+app.use('/hamburguesas', hamburguesaRouter )
+app.use('/chefs', chefRouter )
 
 
 /*

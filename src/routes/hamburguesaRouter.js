@@ -11,4 +11,5 @@ hamburguesaRouter
 .use(limitPet())
 .get('/vegetariana', version({"1.0.0":  ControllerHamburguesa.getHamburguesaVeg}))
 .get('/chefb', version({"1.0.0": ControllerHamburguesa.getHamburguesaChefb}))
+.put('/agregar', middlewareDTO, version({"1.0.0": ControllerHamburguesa.agregarIngrediente}))
 export default hamburguesaRouter;

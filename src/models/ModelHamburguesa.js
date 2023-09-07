@@ -17,6 +17,10 @@ class ModelHamburguesa {
     static async getHamburguesaChefb(){
         return await Hamburguesa.find({chef: "ChefB"}).toArray();
     }
+
+    static async agregarIngrediente(ingredientes){
+        return await Hamburguesa.updateOne({nombre: "Clásica"}, {$push : {ingredientes: ingredientes.ingrediente}});
+    }
 }
 
 export default ModelHamburguesa;

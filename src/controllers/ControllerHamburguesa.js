@@ -9,6 +9,10 @@ class ControllerHamburguesa{
     static async getHamburguesaChefb(req, res, next) {
         res.json( await ModelHamburguesa.getHamburguesaChefb());
     }
+
+    static async agregarIngrediente(req, res, next) {
+        res.json( await ModelHamburguesa.agregarIngrediente(req.body));
+    }
 }
 
 export default ControllerHamburguesa;

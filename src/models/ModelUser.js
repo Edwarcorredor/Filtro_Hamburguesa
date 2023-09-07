@@ -5,10 +5,17 @@ const db = await conexion();
 const Vendedor = db.collection("vendedor");
 
 class ModelUser {
+
+    /**
+     * * Consulta para obtener la información del usuario registrado
+     */
     static async getUser(id){
         return await Vendedor.find({_id: id}).toArray();
     }
 
+    /**
+     ** Funcion para crear el nuevo vendedor, primero se verifica que no este registrado el correo
+     */
     static async setUser(datos){
         try{
             const checkEmail = await Vendedor.findOne({ email: datos.email });
@@ -27,36 +34,6 @@ class ModelUser {
         }     
     }
 
-    static async updateUser(datos, ID){
-        try{
-
-            const existingEmail = await Vendedor.findOne({ email: datos.email, _id: { $ne: ID } });
-    
-            if (existingEmail) {
-                return "Correo ya registrado";
-            }
-    
-            const filter = { _id: ID };
-            datos.password = await hash(datos.password, 10);
-            const update = { $set: datos };
-            const result = await Vendedor.updateOne(filter, update);
-    
-            return result;
-        } catch(error){
-            return { status: 400, message: error.message };
-        }
-    }
-    
-
-    static async deleteUser(ID){
-        try{
-            const filter = {_id: ID}
-            const result = await Vendedor.deleteOne(filter);
-            return result;
-        }catch(error){
-            return {status: 400, message: error.message};
-        }  
-    }
 }
 
 

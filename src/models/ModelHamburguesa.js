@@ -10,7 +10,10 @@ class ModelHamburguesa {
     static async getHamburguesaVeg(){
         return await Hamburguesa.find({categoria: "Vegetariana"}).toArray();
     }
-
+    
+    /**
+     * * Consulta para obtener todas las hamburguesas que fueron creadas por el ChefB 
+     */
     static async getHamburguesaChefb(){
         return await Hamburguesa.find({chef: "ChefB"}).toArray();
     }

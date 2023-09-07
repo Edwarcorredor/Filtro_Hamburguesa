@@ -5,6 +5,10 @@ const db = await conexion();
 
 export default class ModelAuthen {
 
+    /**
+     ** Funcion para verificar si existe el vendedor con ese correo
+     */
+
     static async login(email) {
         try {
             const con = db.collection("vendedor");

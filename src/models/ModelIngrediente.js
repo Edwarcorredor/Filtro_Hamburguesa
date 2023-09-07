@@ -18,6 +18,9 @@ class ModelIngrediente {
         return await Ingrediente.updateMany({}, { $mul: { precio_unitario: 1.5 } })
     }
 
+    /**
+     ** Función para eliminar todos los ingredientes que tengas en el stock en 0
+    */
     static async eliminarSinStock(){
         return await Ingrediente.deleteMany({stock: 0})
     }

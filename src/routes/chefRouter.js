@@ -10,5 +10,6 @@ const chefRouter = Router();
 chefRouter
 .use(limitPet())
 .get('/carnes', version({"1.0.0":  ControllerChef.getChefCarnes}))
+.put('/chefc', version({"1.0.0"  : ControllerChef.updateChefC}))
 
 export default chefRouter;

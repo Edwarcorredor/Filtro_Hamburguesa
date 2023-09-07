@@ -18,12 +18,18 @@ class ModelHamburguesa {
         return await Hamburguesa.find({chef: "ChefB"}).toArray();
     }
 
+    /**
+     * *Funcion para ingresar nuevos ingredientes al array de ingredientes de las hamburguesas
+     */
     static async agregarIngrediente(ingredientes){
         return await Hamburguesa.updateOne({nombre: "Clásica"}, {$push : {ingredientes: ingredientes.ingrediente}});
     }
 
+    /**
+     ** Consulta para encontrar todas las hamburguesas que tengan en sus ingredientes Pan integral
+    */
     static async getHamburguesasPan(){
-        return await Hamburguesa.find({ingredientes: {$all: ["Pan"]}}).toArray();
+        return await Hamburguesa.find({ingredientes: {$all: ["Pan integral"]}}).toArray();
     }
 }
 

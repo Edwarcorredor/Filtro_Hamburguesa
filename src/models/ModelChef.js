@@ -10,6 +10,10 @@ class ModelChef {
     static async getChefCarnes(){
         return await Chef.find({especialidad: "Carnes"}).toArray();
     }
+
+    static async updateChefC(){
+        return await Chef.updateOne({nombre: "ChefC"}, {$set: {especialidad:"Cocina Internacional"}});
+    }
 }
 
 export default ModelChef;

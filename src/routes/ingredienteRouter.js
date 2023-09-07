@@ -11,5 +11,6 @@ ingredienteRouter
 .use(limitPet())
 .get('/stockmenor', version({"1.0.0":  ControllerIngrediente.getStockMenor}))
 .put('/aumentar', version({"1.0.0": ControllerIngrediente.aumentarPrecio}))
+.delete('/sinstock', version({"1.0.0": ControllerIngrediente.eliminarSinStock}))
 
 export default ingredienteRouter;

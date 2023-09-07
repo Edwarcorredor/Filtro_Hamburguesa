@@ -9,6 +9,10 @@ class ControllerIngrediente{
     static async aumentarPrecio(req, res, next){
         res.json( await ModelIngrediente.aumentarPrecio());
     }
+
+    static async eliminarSinStock(req, res, next){
+        res.json( await ModelIngrediente. eliminarSinStock());
+    }
 }
 
 export default ControllerIngrediente;

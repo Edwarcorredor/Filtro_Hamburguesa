@@ -17,6 +17,10 @@ class ModelIngrediente {
     static async aumentarPrecio(){
         return await Ingrediente.updateMany({}, { $mul: { precio_unitario: 1.5 } })
     }
+
+    static async eliminarSinStock(){
+        return await Ingrediente.deleteMany({stock: 0})
+    }
 }
 
 export default ModelIngrediente;

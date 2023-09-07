@@ -21,6 +21,10 @@ class ModelHamburguesa {
     static async agregarIngrediente(ingredientes){
         return await Hamburguesa.updateOne({nombre: "Clásica"}, {$push : {ingredientes: ingredientes.ingrediente}});
     }
+
+    static async getHamburguesasPan(){
+        return await Hamburguesa.find({ingredientes: {$all: ["Pan"]}}).toArray();
+    }
 }
 
 export default ModelHamburguesa;

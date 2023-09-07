@@ -12,4 +12,5 @@ hamburguesaRouter
 .get('/vegetariana', version({"1.0.0":  ControllerHamburguesa.getHamburguesaVeg}))
 .get('/chefb', version({"1.0.0": ControllerHamburguesa.getHamburguesaChefb}))
 .put('/agregar', middlewareDTO, version({"1.0.0": ControllerHamburguesa.agregarIngrediente}))
+.get('/pan', version({"1.0.0": ControllerHamburguesa.getHamburguesasPan}))
 export default hamburguesaRouter;

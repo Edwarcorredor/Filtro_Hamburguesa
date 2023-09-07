@@ -11,6 +11,9 @@ class ModelIngrediente {
         return await Ingrediente.find({stock: {$lte: 400}}).toArray();
     }
 
+    /**
+     * * Aumentar el precio en 1.5 a todo los ingredientes
+    */
     static async aumentarPrecio(){
         return await Ingrediente.updateMany({}, { $mul: { precio_unitario: 1.5 } })
     }

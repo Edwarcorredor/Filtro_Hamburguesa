@@ -10,5 +10,5 @@ const hamburguesaRouter = Router();
 hamburguesaRouter
 .use(limitPet())
 .get('/vegetariana', version({"1.0.0":  ControllerHamburguesa.getHamburguesaVeg}))
-
+.get('/chefb', version({"1.0.0": ControllerHamburguesa.getHamburguesaChefb}))
 export default hamburguesaRouter;

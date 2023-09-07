@@ -10,6 +10,10 @@ class ModelHamburguesa {
     static async getHamburguesaVeg(){
         return await Hamburguesa.find({categoria: "Vegetariana"}).toArray();
     }
+
+    static async getHamburguesaChefb(){
+        return await Hamburguesa.find({chef: "ChefB"}).toArray();
+    }
 }
 
 export default ModelHamburguesa;
